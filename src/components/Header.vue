@@ -34,12 +34,6 @@ header {
 #search {
   margin-left: 2.5rem;
 }
-.nav a {
-  transition: 0.2s;
-}
-.nav a:hover {
-  color: var(--cor-1);
-}
 
 #search {
   background: url("../assets/search.svg") no-repeat center;
@@ -66,5 +60,21 @@ header {
 
 #logo-link:hover #logo {
   transform: rotate(-15deg);
+}
+.nav a {
+  position: relative;
+  transition: 0.2s;
+}
+.nav a:hover {
+  color: var(--cor-1);
+}
+.router-link-active::after {
+  content: "";
+  display: block;
+  position: absolute;
+  bottom: -0.2rem;
+  width: 60%;
+  height: 2px;
+  background: currentColor;
 }
 </style>

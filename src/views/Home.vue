@@ -3,7 +3,7 @@
     <div class="flex-1">
       <h1>
         Search for a cat <br />
-        or a dog <span>breed</span>
+        or dog <span>breed!</span>
       </h1>
       <p class="description">
         Data for more than 400 cat and <br />
@@ -22,7 +22,29 @@
 </template>
 
 <script>
-export default {};
+import axios from "axios";
+export default {
+  data() {
+    return {
+      catsList: [],
+      dogsList: [],
+    };
+  },
+  methods: {
+    fetchPetsBreeds() {
+      axios
+        .get(`https://api.api-ninjas.com/v1/dogs?max_height=9999`, {
+          headers: {
+            "X-Api-Key": "e4cVT8BzEFD562z74IXKZg==qttxkrNa0ZYegkU8",
+          },
+        })
+        .then((data) => console.log(data));
+    },
+  },
+  mounted() {
+    this.fetchPetsBreeds();
+  },
+};
 </script>
 
 <style scoped>
@@ -30,7 +52,6 @@ export default {};
   display: flex;
   justify-content: space-between;
   align-items: center;
-  min-height: calc(100vh - 7rem);
 }
 
 .flex-2 img {
@@ -40,6 +61,21 @@ export default {};
 .img,
 h1 {
   margin-top: -6rem;
+}
+.img {
+  position: relative;
+}
+.img::after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 1rem;
+  height: 22rem;
+  width: 22rem;
+  background: url("../assets/hexagon.svg") no-repeat center;
+  background-size: 20rem;
+  transform: rotate(30deg);
+  z-index: -1;
 }
 
 h1 {
@@ -52,11 +88,14 @@ h1 span {
 }
 
 .form {
-  margin-top: 2rem;
+  margin-top: 3rem;
+  display: flex;
+  width: 90%;
 }
 
 .form input {
   margin-right: 0.5rem;
+  flex: 1;
 }
 
 .description {
