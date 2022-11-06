@@ -1,6 +1,9 @@
 <template>
   <header class="container">
-    <router-link to="/" id="logo"></router-link>
+    <router-link to="/" id="logo-link">
+      <span id="logo"></span>
+      <span>Pets breeds</span>
+    </router-link>
     <nav class="nav">
       <ul>
         <li><router-link to="/">Home</router-link></li>
@@ -44,16 +47,24 @@ header {
   height: 1.5rem;
   background-size: 1rem;
 }
-
+#logo-link span {
+  display: inline-block;
+}
+#logo-link {
+  display: flex;
+  align-items: center;
+  font-weight: 800;
+}
 #logo {
   background: url("../assets/paw.svg") no-repeat center;
   background-size: 1.5rem;
   width: 2rem;
   height: 2rem;
   transition: 0.2s;
+  margin-right: 0.5rem;
 }
 
-#logo:hover {
+#logo-link:hover #logo {
   transform: rotate(-15deg);
 }
 </style>
