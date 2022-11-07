@@ -4,13 +4,19 @@
     <p v-if="loadingList">Loading</p>
     <ul v-if="petList.length" class="list">
       <li v-for="dog in petList" :key="dog.name" class="pet-item">
-        <router-link to="/">
+        <router-link :to="`/${dog.name}`">
           <img :src="dog.image_link" :alt="dog.name" />
           <p>{{ dog.name }}</p>
         </router-link>
       </li>
     </ul>
-    <button class="btn load-more" @click="loadMore">Load more</button>
+    <button
+      class="btn load-more"
+      @click="loadMore"
+      :disabled="loadingButton || loadingList"
+    >
+      {{ loadingButton ? "Loading more..." : "Load more" }}
+    </button>
   </main>
 </template>
 
@@ -22,6 +28,7 @@ export default {
     return {
       petList: [],
       loadingList: true,
+      loadingButton: false,
       offset: 0,
     };
   },
@@ -47,9 +54,11 @@ export default {
           this.loadingList = false;
         });
     },
-    loadMore() {
+    async loadMore() {
       this.offset += 20;
-      this.fetchPets();
+      this.loadingButton = true;
+      await this.fetchPets();
+      this.loadingButton = false;
     },
   },
   mounted() {
@@ -69,6 +78,7 @@ h1 span {
 .list {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: 180px;
   grid-gap: 0.7rem;
   margin-top: 3rem;
 }
@@ -86,6 +96,7 @@ h1 span {
 }
 
 .pet-item a {
+  width: 100%;
   height: 100%;
 }
 
@@ -108,5 +119,10 @@ h1 span {
 .load-more {
   margin: 3rem auto 0 auto;
   display: block;
+}
+
+.load-more:disabled {
+  background: var(--cor-3);
+  cursor: progress;
 }
 </style>

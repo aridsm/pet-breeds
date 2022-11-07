@@ -8,6 +8,12 @@ const routes = [
   { path: "/", name: "home", component: lazyLoad("Home") },
   { path: "/cats", name: "cats", component: lazyLoad("PetsList") },
   { path: "/dogs", name: "dogs", component: lazyLoad("PetsList") },
+  {
+    path: "/:breed",
+    name: "breed",
+    component: lazyLoad("BreedDetails"),
+    props: true,
+  },
 ];
 
 export default createRouter({
