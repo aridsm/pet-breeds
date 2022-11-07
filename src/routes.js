@@ -6,8 +6,8 @@ function lazyLoad(view) {
 
 const routes = [
   { path: "/", name: "home", component: lazyLoad("Home") },
-  { path: "/cats", name: "cats", component: lazyLoad("Cats") },
-  { path: "/dogs", name: "dogs", component: lazyLoad("Dogs") },
+  { path: "/cats", name: "cats", component: lazyLoad("PetsList") },
+  { path: "/dogs", name: "dogs", component: lazyLoad("PetsList") },
 ];
 
 export default createRouter({

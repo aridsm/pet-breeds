@@ -36,7 +36,7 @@ input {
   border: none;
   outline: none;
   background: #eff5e7;
-  box-shadow: 0px 0px 50px rgba(203, 215, 189, 0.5);
+  box-shadow: 0px 0px 50px rgba(203, 215, 189, 0.6);
   padding: 0.9rem;
   border-radius: 0.3rem;
 }

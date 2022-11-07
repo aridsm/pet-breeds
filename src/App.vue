@@ -5,6 +5,8 @@
     <Footer />
     <span class="hexagon" id="hexagon-1"></span>
     <span class="hexagon" id="hexagon-2"></span>
+    <span class="triangle" id="triangle-1"></span>
+    <span class="triangle" id="triangle-2"></span>
   </div>
 </template>
 
@@ -23,7 +25,7 @@ export default {
 }
 .hexagon {
   background: url("./assets/hexagon.svg") no-repeat center;
-  position: absolute;
+  position: fixed;
 }
 
 #hexagon-1 {
@@ -41,5 +43,25 @@ export default {
   background-size: 8rem;
   height: 10rem;
   width: 10rem;
+}
+
+.triangle {
+  background: url("./assets/triangle.svg") no-repeat center;
+  position: fixed;
+  background-size: 1.8rem;
+  height: 1.8rem;
+  width: 1.8rem;
+}
+
+#triangle-1 {
+  top: 20%;
+  left: 9%;
+  transform: rotate(45deg);
+}
+
+#triangle-2 {
+  bottom: 15%;
+  right: 11%;
+  transform: rotate(-20deg);
 }
 </style>
