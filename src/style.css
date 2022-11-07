@@ -21,7 +21,6 @@ body {
 main {
   min-height: calc(100vh - 7rem);
   position: relative;
-  padding: 4rem inherit;
 }
 button,
 a,
