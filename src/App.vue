@@ -29,15 +29,15 @@ export default {
 }
 
 #hexagon-1 {
-  bottom: -10%;
-  left: -7rem;
+  bottom: -5rem;
+  left: -5rem;
   transform: rotate(-10deg);
   background-size: 14rem;
   height: 16rem;
   width: 16rem;
 }
 #hexagon-2 {
-  top: -10%;
+  top: -4rem;
   right: -3rem;
   transform: rotate(10deg);
   background-size: 8rem;

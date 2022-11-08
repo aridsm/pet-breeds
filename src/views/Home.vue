@@ -1,5 +1,5 @@
 <template>
-  <main class="container main">
+  <main class="container main padding">
     <div class="flex-1">
       <h1>
         Search for a cat <br />
@@ -52,8 +52,12 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-top: 7rem;
 }
-
+.flex-1,
+.flex-2 {
+  margin-top: -2rem;
+}
 .flex-2 img {
   width: 14rem;
 }

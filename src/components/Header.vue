@@ -106,7 +106,7 @@ header.scrolled {
 .nav a:hover {
   color: var(--cor-1);
 }
-.router-link-active::after {
+.nav .router-link-active::after {
   content: "";
   display: block;
   position: absolute;

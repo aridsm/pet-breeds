@@ -17,6 +17,7 @@
     >
       {{ loadingButton ? "Loading more..." : "Load more" }}
     </button>
+    <button @click="scrollToTop" class="scroll-btn">Top</button>
   </main>
 </template>
 
@@ -68,6 +69,9 @@ export default {
       await this.fetchPets();
       this.loadingButton = false;
     },
+    scrollToTop() {
+      window.scroll({ top: 0, behavior: "smooth" });
+    },
   },
   mounted() {
     this.fetchPets();
@@ -110,7 +114,7 @@ h1 span {
 
 .pet-item p {
   position: absolute;
-  bottom: -3rem;
+  transform: translateY(0);
   width: 100%;
   height: 3rem;
   line-height: 3rem;
@@ -121,7 +125,7 @@ h1 span {
 }
 
 .pet-item:hover p {
-  bottom: 0;
+  transform: translateY(-3rem);
 }
 
 .load-more {
@@ -138,5 +142,16 @@ h1 span {
   height: calc(100vh - 12rem);
   display: grid;
   place-items: center;
+}
+
+.scroll-btn {
+  position: fixed;
+  bottom: 5%;
+  right: 5%;
+  background: var(--cor-4);
+  box-shadow: 0px 0px 40px rgba(203, 215, 189, 1);
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
 }
 </style>

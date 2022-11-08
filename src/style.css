@@ -9,6 +9,7 @@
   --cor-1: #ec6495;
   --cor-2: #eaf0e3;
   --cor-3: #8b8a9d;
+  --cor-4: #eff5e7;
 }
 
 body {
@@ -36,7 +37,7 @@ input {
 input {
   border: none;
   outline: none;
-  background: #eff5e7;
+  background: var(--cor-4);
   box-shadow: 0px 0px 50px rgba(203, 215, 189, 0.6);
   padding: 0.9rem;
   border-radius: 0.3rem;
