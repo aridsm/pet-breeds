@@ -1,7 +1,7 @@
 <template>
-  <main class="container main">
+  <main class="container padding">
     <h1>{{ pet }} <span>breeds</span></h1>
-    <p v-if="loadingList">Loading</p>
+    <Loading v-if="loadingList" class="load-spinner">Loading</Loading>
     <ul v-if="petList.length" class="list">
       <li v-for="dog in petList" :key="dog.name" class="pet-item">
         <router-link :to="`/${dog.name}`">
@@ -22,6 +22,7 @@
 
 <script>
 import axios from "axios";
+import Loading from "../components/utilities/Loading.vue";
 
 export default {
   data() {
@@ -32,6 +33,7 @@ export default {
       offset: 0,
     };
   },
+  components: { Loading },
   computed: {
     pets() {
       return this.$route.name;
@@ -76,7 +78,6 @@ export default {
 <style>
 h1 {
   font-size: 2.4rem;
-  margin-top: 1rem;
 }
 h1 span {
   color: var(--cor-1);
@@ -131,5 +132,11 @@ h1 span {
 .load-more:disabled {
   background: var(--cor-3);
   cursor: progress;
+}
+
+.load-spinner {
+  height: calc(100vh - 12rem);
+  display: grid;
+  place-items: center;
 }
 </style>

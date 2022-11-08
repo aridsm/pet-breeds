@@ -25,7 +25,7 @@ export default {
 }
 .hexagon {
   background: url("./assets/hexagon.svg") no-repeat center;
-  position: fixed;
+  position: absolute;
 }
 
 #hexagon-1 {

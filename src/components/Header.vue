@@ -1,29 +1,67 @@
 <template>
-  <header class="container">
-    <router-link to="/" id="logo-link">
-      <span id="logo"></span>
-      <span>Pets breeds</span>
-    </router-link>
-    <nav class="nav">
-      <ul>
-        <li><router-link to="/">Home</router-link></li>
-        <li><router-link to="/dogs">Dogs</router-link></li>
-        <li><router-link to="/cats">Cats</router-link></li>
-      </ul>
-    </nav>
-    <button id="search"></button>
+  <header :class="{ scrolled: didPageScroll }">
+    <div class="container">
+      <router-link to="/" id="logo-link">
+        <span id="logo"></span>
+        <span>Pets breeds</span>
+      </router-link>
+      <nav class="nav">
+        <ul>
+          <li><router-link to="/">Home</router-link></li>
+          <li><router-link to="/dogs">Dogs</router-link></li>
+          <li><router-link to="/cats">Cats</router-link></li>
+        </ul>
+      </nav>
+      <button id="search"></button>
+    </div>
   </header>
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      didPageScroll: false,
+    };
+  },
+  methods: {
+    checkPageScroll() {
+      if (window.scrollY > 0) {
+        this.didPageScroll = true;
+      } else {
+        this.didPageScroll = false;
+      }
+    },
+  },
+  mounted() {
+    window.addEventListener("scroll", this.checkPageScroll);
+  },
+  unmounted() {
+    window.removeEventListener("scroll", this.checkPageScroll);
+  },
+};
 </script>
 
 <style scoped>
-header {
+header .container {
   display: flex;
   align-items: center;
+  height: 100%;
+}
+
+header {
+  position: fixed;
+  width: 100%;
+  z-index: 99;
   height: 7rem;
+  transition: 0.2s;
+  background: transparent;
+}
+
+header.scrolled {
+  height: 4rem;
+  background: var(--cor-2);
+  border-bottom: 1px solid rgb(193, 204, 210);
 }
 
 .nav {
