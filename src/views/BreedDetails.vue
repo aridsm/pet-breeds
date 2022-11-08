@@ -38,6 +38,11 @@ export default {
   mounted() {
     this.fetchBreedDetails();
   },
+  watch: {
+    $route(to, from) {
+      console.log(to, from);
+    },
+  },
 };
 </script>
 

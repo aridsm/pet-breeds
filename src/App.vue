@@ -1,7 +1,7 @@
 <template>
   <div id="main-comp">
     <Header />
-    <router-view></router-view>
+    <router-view :key="$route.fullPath"></router-view>
     <Footer />
     <span class="hexagon" id="hexagon-1"></span>
     <span class="hexagon" id="hexagon-2"></span>
@@ -32,9 +32,9 @@ export default {
   bottom: -10%;
   left: -7rem;
   transform: rotate(-10deg);
-  background-size: 15rem;
-  height: 18rem;
-  width: 18rem;
+  background-size: 14rem;
+  height: 16rem;
+  width: 16rem;
 }
 #hexagon-2 {
   top: -10%;
@@ -47,10 +47,10 @@ export default {
 
 .triangle {
   background: url("./assets/triangle.svg") no-repeat center;
-  position: fixed;
-  background-size: 1.8rem;
-  height: 1.8rem;
-  width: 1.8rem;
+  position: absolute;
+  background-size: 1.6rem;
+  height: 1.6rem;
+  width: 1.6rem;
 }
 
 #triangle-1 {

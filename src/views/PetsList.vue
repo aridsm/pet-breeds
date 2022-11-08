@@ -27,14 +27,20 @@ export default {
   data() {
     return {
       petList: [],
-      loadingList: true,
+      loadingList: false,
       loadingButton: false,
       offset: 0,
     };
   },
   computed: {
-    pet() {
+    pets() {
       return this.$route.name;
+    },
+    pet() {
+      return (this.pets.charAt(0).toUpperCase() + this.pets.slice(1)).slice(
+        0,
+        -1
+      );
     },
   },
   methods: {
@@ -42,7 +48,7 @@ export default {
       this.loadingList = true;
       await axios
         .get(
-          `https://api.api-ninjas.com/v1/${this.pet}?max_weight=9999&offset=${this.offset}`,
+          `https://api.api-ninjas.com/v1/${this.pets}?max_weight=9999&offset=${this.offset}`,
           {
             headers: {
               "X-Api-Key": "e4cVT8BzEFD562z74IXKZg==qttxkrNa0ZYegkU8",
@@ -78,7 +84,7 @@ h1 span {
 .list {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-auto-rows: 180px;
+  grid-auto-rows: 220px;
   grid-gap: 0.7rem;
   margin-top: 3rem;
 }
@@ -98,6 +104,7 @@ h1 span {
 .pet-item a {
   width: 100%;
   height: 100%;
+  background: var(--cor-3);
 }
 
 .pet-item p {

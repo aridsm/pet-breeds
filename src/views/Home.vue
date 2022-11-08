@@ -70,10 +70,11 @@ h1 {
   display: block;
   position: absolute;
   top: 1rem;
+  right: -6rem;
   height: 22rem;
   width: 22rem;
   background: url("../assets/hexagon.svg") no-repeat center;
-  background-size: 20rem;
+  background-size: 19rem;
   transform: rotate(30deg);
   z-index: -1;
 }
@@ -98,6 +99,9 @@ h1 span {
   flex: 1;
 }
 
+.form input:focus {
+  box-shadow: 0 0 0 1px var(--cor-3);
+}
 .description {
   color: var(--cor-3);
   margin-top: 1rem;
