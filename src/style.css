@@ -87,3 +87,19 @@ li {
 .btn:hover {
   background: #f17ca7;
 }
+
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--cor-4);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #b4b3c4;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--cor-3);
+}
