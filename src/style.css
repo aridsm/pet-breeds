@@ -10,11 +10,12 @@
   --cor-2: #eaf0e3;
   --cor-3: #8b8a9d;
   --cor-4: #eff5e7;
+  --cor-5: #2e2d60;
 }
 
 body {
   background: var(--cor-2);
-  color: #2e2d60;
+  color: var(--cor-5);
   font-family: "Sora", sans-serif;
   font-size: 14px;
   font-weight: 400;
@@ -26,7 +27,9 @@ main {
 
 button,
 a,
-input {
+input,
+select,
+option {
   font-weight: inherit;
   font-size: inherit;
   font-family: inherit;
@@ -34,12 +37,13 @@ input {
   color: inherit;
 }
 
-input {
+input,
+select {
   border: none;
   outline: none;
   background: var(--cor-4);
   box-shadow: 0px 0px 50px rgba(203, 215, 189, 0.6);
-  padding: 0.9rem;
+  padding: 1rem;
   border-radius: 0.3rem;
 }
 

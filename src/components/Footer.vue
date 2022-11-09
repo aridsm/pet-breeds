@@ -1,10 +1,8 @@
 <template>
-  <footer>Made by <a href="/">Ariane Morelato</a></footer>
+  <footer>
+    Made by <a href="https://github.com/aridsm">Ariane Morelato</a>
+  </footer>
 </template>
-
-<script>
-export default {};
-</script>
 
 <style scoped>
 footer {

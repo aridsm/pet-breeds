@@ -9,11 +9,7 @@
         Data for more than 400 cat and <br />
         dog breeds
       </p>
-
-      <form class="form">
-        <input type="text" placeholder="Golden Retriever" />
-        <button class="btn">Search</button>
-      </form>
+      <SearchBreeds class="form" />
     </div>
     <div class="flex-2 img">
       <img src="../assets/dog.svg" />
@@ -22,28 +18,13 @@
 </template>
 
 <script>
-import axios from "axios";
+import SearchBreeds from "../components/utilities/SearchBreeds.vue";
+
 export default {
-  data() {
-    return {
-      catsList: [],
-      dogsList: [],
-    };
+  created() {
+    document.title = "Home | Pet breeds";
   },
-  methods: {
-    fetchPetsBreeds() {
-      axios
-        .get(`https://api.api-ninjas.com/v1/dogs?max_height=9999`, {
-          headers: {
-            "X-Api-Key": "e4cVT8BzEFD562z74IXKZg==qttxkrNa0ZYegkU8",
-          },
-        })
-        .then((data) => console.log(data));
-    },
-  },
-  mounted() {
-    this.fetchPetsBreeds();
-  },
+  components: { SearchBreeds },
 };
 </script>
 
@@ -64,7 +45,7 @@ export default {
 
 .img,
 h1 {
-  margin-top: -6rem;
+  margin-top: -7rem;
 }
 .img {
   position: relative;
@@ -92,22 +73,13 @@ h1 span {
   color: var(--cor-1);
 }
 
-.form {
-  margin-top: 3rem;
-  display: flex;
-  width: 90%;
-}
-
-.form input {
-  margin-right: 0.5rem;
-  flex: 1;
-}
-
-.form input:focus {
-  box-shadow: 0 0 0 1px var(--cor-3);
-}
 .description {
   color: var(--cor-3);
   margin-top: 1rem;
+}
+
+.form {
+  margin-top: 3rem;
+  width: 90%;
 }
 </style>

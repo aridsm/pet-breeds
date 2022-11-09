@@ -64,7 +64,7 @@ export default {
       let newName = name;
 
       function valueIsARange(val) {
-        return val.startsWith("max") || val.startsWith("min");
+        return !(val.startsWith("max") || val.startsWith("min"));
       }
 
       if (valueIsARange(newName)) {
@@ -75,6 +75,9 @@ export default {
   },
   mounted() {
     this.fetchBreedDetails();
+  },
+  created() {
+    document.title = this.breed;
   },
 };
 </script>
