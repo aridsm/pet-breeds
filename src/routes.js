@@ -9,7 +9,7 @@ const routes = [
   { path: "/cats", name: "cats", component: lazyLoad("PetsList") },
   { path: "/dogs", name: "dogs", component: lazyLoad("PetsList") },
   {
-    path: "/:breed",
+    path: "/dogs/:breed",
     name: "breed",
     component: lazyLoad("BreedDetails"),
     props: true,

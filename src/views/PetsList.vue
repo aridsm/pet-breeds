@@ -4,7 +4,7 @@
     <Loading v-if="loadingList" class="load-spinner">Loading</Loading>
     <ul v-if="petList.length" class="list">
       <li v-for="dog in petList" :key="dog.name" class="pet-item">
-        <router-link :to="`/${dog.name}`" target="_blank">
+        <router-link :to="`/dogs/${dog.name}`" target="_blank">
           <img :src="dog.image_link" :alt="dog.name" />
           <p>{{ dog.name }}</p>
         </router-link>

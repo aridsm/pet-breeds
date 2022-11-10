@@ -5,7 +5,9 @@
         <label for="name">Search for a breed</label>
         <input
           type="text"
-          placeholder="Golden Retriever"
+          :placeholder="
+            selectedPet === 'dogs' ? 'Golden Retriever' : 'Maine Coon'
+          "
           id="name"
           v-model="inputValue"
         />
@@ -38,16 +40,21 @@
       </div>
       <button class="btn" type="submit">Search</button>
     </form>
-    <ul class="results">
-      <li v-for="pet in petsList" :key="pet.name">
-        <router-link to="/"> {{ pet.name }} </router-link>
-      </li>
-    </ul>
+    <div v-if="inputValue.length" class="results">
+      <Loading v-if="loadingPets" class="load-spinner" />
+      <ul v-if="petsList.length">
+        <li v-for="pet in petsList" :key="pet.name">
+          <router-link to="/"> {{ pet.name }} </router-link>
+        </li>
+      </ul>
+      <p v-if="!loadingPets && !petsList.length">No data found</p>
+    </div>
   </div>
 </template>
 
 <script>
 import axios from "axios";
+import Loading from "./Loading.vue";
 
 export default {
   data() {
@@ -55,11 +62,15 @@ export default {
       petsList: [],
       inputValue: "",
       selectedPet: "dogs",
+      loadingPets: false,
     };
   },
+  components: { Loading },
   methods: {
-    fetchPetsBreeds() {
-      axios
+    async fetchPetsBreeds() {
+      this.loadingPets = true;
+      this.petsList = [];
+      await axios
         .get(
           `https://api.api-ninjas.com/v1/${this.selectedPet}?max_height=9999&name=${this.inputValue}`,
           {
@@ -71,12 +82,29 @@ export default {
         .then((d) => {
           this.petsList = d.data.slice(0, 9);
         });
+
+      this.loadingPets = false;
+    },
+    checkOutsideClick(e) {
+      const form = this.$el.querySelector("form");
+      if (e.target !== form && !form.contains(e.target)) {
+        this.inputValue = "";
+      }
     },
   },
   watch: {
     inputValue() {
       this.fetchPetsBreeds();
     },
+    selectedPet() {
+      this.fetchPetsBreeds();
+    },
+  },
+  mounted() {
+    window.addEventListener("click", this.checkOutsideClick);
+  },
+  unmounted() {
+    window.removeEventListener("click", this.checkOutsideClick);
   },
 };
 </script>
@@ -84,6 +112,8 @@ export default {
 <style scoped>
 form {
   display: flex;
+  position: relative;
+  z-index: 3;
 }
 .input-container {
   margin-right: 0.5rem;
@@ -165,13 +195,20 @@ label[for="name"],
   border-radius: 0.3rem;
   width: 100%;
   margin-top: 0.5rem;
-  display: flex;
-  flex-direction: column;
   max-height: 10rem;
   overflow: auto;
   color: var(--cor-3);
+  display: grid;
 }
 
+.load-spinner {
+  padding: 2rem;
+  margin: 0 auto;
+}
+.results ul {
+  display: flex;
+  flex-direction: column;
+}
 .results li + li {
   margin-top: 0.8rem;
 }

@@ -37,6 +37,7 @@ export default {
   },
   computed: {
     pet() {
+      console.log(this.$route);
       return this.$route.name;
     },
     breedDetailsList() {
