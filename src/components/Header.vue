@@ -5,25 +5,40 @@
         <span id="logo"></span>
         <span>Pets breeds</span>
       </router-link>
-      <nav class="nav">
+      <nav class="nav" v-show="!searchFieldShown">
         <ul>
           <li><router-link to="/">Home</router-link></li>
           <li><router-link to="/dogs">Dogs</router-link></li>
           <li><router-link to="/cats">Cats</router-link></li>
         </ul>
       </nav>
-      <button id="search"></button>
+      <button
+        id="search"
+        v-show="!searchFieldShown"
+        @click="showSearchField"
+      ></button>
+      <transition>
+        <SearchBreeds
+          class="form"
+          classBtn="btnHeader"
+          el="header"
+          v-show="searchFieldShown"
+        />
+      </transition>
     </div>
   </header>
 </template>
 
 <script>
+import SearchBreeds from "./utilities/SearchBreeds.vue";
 export default {
   data() {
     return {
       didPageScroll: false,
+      searchFieldShown: false,
     };
   },
+  components: { SearchBreeds },
   methods: {
     checkPageScroll() {
       if (window.scrollY > 0) {
@@ -32,12 +47,29 @@ export default {
         this.didPageScroll = false;
       }
     },
+    showSearchField() {
+      this.searchFieldShown = true;
+    },
+    checkOutsideClick(e) {
+      const searchBtn = this.$el.querySelector("#search");
+      const form = this.$el.querySelector(".form");
+
+      function wasOutsideClick(el) {
+        return e.target !== el && !el.contains(e.target);
+      }
+
+      if (wasOutsideClick(searchBtn) && wasOutsideClick(form)) {
+        this.searchFieldShown = false;
+      }
+    },
   },
   mounted() {
     window.addEventListener("scroll", this.checkPageScroll);
+    window.addEventListener("click", this.checkOutsideClick);
   },
   unmounted() {
     window.removeEventListener("scroll", this.checkPageScroll);
+    window.removeEventListener("click", this.checkOutsideClick);
   },
 };
 </script>
@@ -47,6 +79,7 @@ header .container {
   display: flex;
   align-items: center;
   height: 100%;
+  position: relative;
 }
 
 header {
@@ -114,5 +147,11 @@ header.scrolled {
   width: 60%;
   height: 2px;
   background: currentColor;
+}
+
+.form {
+  position: absolute;
+  right: 0;
+  max-height: 2.6rem;
 }
 </style>

@@ -9,7 +9,7 @@
         Data for more than 400 cat and <br />
         dog breeds
       </p>
-      <SearchBreeds class="form" />
+      <SearchBreeds class="form" el="home" />
     </div>
     <div class="flex-2 img">
       <img src="../assets/dog.svg" />

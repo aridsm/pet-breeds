@@ -18,7 +18,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 #main-comp {
   overflow: hidden;
   position: relative;
@@ -63,5 +63,15 @@ export default {
   bottom: 15%;
   right: 11%;
   transform: rotate(-20deg);
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
+  transform: translateY(-1rem);
+}
+.v-enter-active,
+.v-leave-active {
+  transition: 0.2s;
 }
 </style>

@@ -1,54 +1,58 @@
 <template>
   <div class="search-container">
-    <form>
+    <form :id="formId">
       <div class="input-container">
-        <label for="name">Search for a breed</label>
+        <label :for="inputId">Search for a breed</label>
         <input
           type="text"
           :placeholder="
             selectedPet === 'dogs' ? 'Golden Retriever' : 'Maine Coon'
           "
-          id="name"
+          :id="inputId"
           v-model="inputValue"
         />
         <div class="select-option">
           <button type="button">{{ selectedPet }}</button>
           <div class="options">
-            <label for="dogs" :class="{ active: selectedPet === 'dogs' }"
+            <label :for="dogInputId" :class="{ active: selectedPet === 'dogs' }"
               >Dogs</label
             >
             <input
               type="radio"
-              id="dogs"
-              name="pet"
+              :id="dogInputId"
+              :name="nameRadios"
               value="dogs"
               v-model="selectedPet"
             />
 
-            <label for="cats" :class="{ active: selectedPet === 'cats' }"
+            <label :for="catInputId" :class="{ active: selectedPet === 'cats' }"
               >Cats</label
             >
             <input
               type="radio"
-              id="cats"
-              name="pet"
+              :id="catInputId"
+              :name="nameRadios"
               value="cats"
               v-model="selectedPet"
             />
           </div>
         </div>
       </div>
-      <button class="btn" type="submit">Search</button>
+      <button class="btn" :class="{ btnHeader: classBtn }" type="submit">
+        Search
+      </button>
     </form>
-    <div v-if="inputValue.length" class="results">
-      <Loading v-if="loadingPets" class="load-spinner" />
-      <ul v-if="petsList.length">
-        <li v-for="pet in petsList" :key="pet.name">
-          <router-link to="/"> {{ pet.name }} </router-link>
-        </li>
-      </ul>
-      <p v-if="!loadingPets && !petsList.length">No data found</p>
-    </div>
+    <transition>
+      <div v-if="inputValue.length" class="results">
+        <Loading v-if="loadingPets" class="load-spinner" />
+        <ul v-if="petsList.length">
+          <li v-for="pet in petsList" :key="pet.name">
+            <router-link to="/"> {{ pet.name }} </router-link>
+          </li>
+        </ul>
+        <p v-if="!loadingPets && !petsList.length">No data found</p>
+      </div>
+    </transition>
   </div>
 </template>
 
@@ -65,7 +69,25 @@ export default {
       loadingPets: false,
     };
   },
+  props: ["classBtn", "el"],
   components: { Loading },
+  computed: {
+    formId() {
+      return "form-" + this.el;
+    },
+    inputId() {
+      return "name-" + this.el;
+    },
+    catInputId() {
+      return "cat-" + this.el;
+    },
+    dogInputId() {
+      return "dog-" + this.el;
+    },
+    nameRadios() {
+      return "pets-" + this.el;
+    },
+  },
   methods: {
     async fetchPetsBreeds() {
       this.loadingPets = true;
@@ -86,7 +108,7 @@ export default {
       this.loadingPets = false;
     },
     checkOutsideClick(e) {
-      const form = this.$el.querySelector("form");
+      const form = this.$el.querySelector(`#${this.formId}`);
       if (e.target !== form && !form.contains(e.target)) {
         this.inputValue = "";
       }
@@ -114,22 +136,25 @@ form {
   display: flex;
   position: relative;
   z-index: 3;
+  height: 100%;
 }
 .input-container {
   margin-right: 0.5rem;
   flex: 1;
+  height: 100%;
   position: relative;
 }
 
 .input-container input {
   width: 100%;
+  height: 100%;
 }
 
 form input:focus {
   box-shadow: 0 0 0 1px var(--cor-3);
 }
 
-label[for="name"],
+.input-container > label,
 .options input {
   visibility: hidden;
   position: absolute;
@@ -186,6 +211,7 @@ label[for="name"],
 }
 .search-container {
   position: relative;
+  height: 100%;
 }
 .results {
   position: absolute;
@@ -223,5 +249,9 @@ label[for="name"],
 
 .results li:hover {
   color: var(--cor-5);
+}
+
+.btnHeader {
+  padding: 0.5rem 1.2rem;
 }
 </style>
