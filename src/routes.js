@@ -12,7 +12,7 @@ const routes = [
     children: [
       {
         path: "",
-        component: lazyLoad("PetsList"),
+        component: lazyLoad("BreedsList"),
       },
       {
         path: ":breed",

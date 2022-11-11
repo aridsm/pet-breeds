@@ -1,14 +1,13 @@
 <template>
   <h1>{{ pet }} <span>breeds</span></h1>
-  <Loading v-if="loadingList" class="load-spinner">Loading</Loading>
-  <ul v-if="petList.length" class="list">
-    <li v-for="pet in petList" :key="pet.name" class="pet-item">
-      <router-link :to="`/${pets}/${pet.name}`" target="_blank">
-        <img :src="pet.image_link" :alt="pet.name" />
-        <p>{{ pet.name }}</p>
-      </router-link>
-    </li>
-  </ul>
+  <Loading v-if="loadingList && !petList.length" class="load-spinner"
+    >Loading</Loading
+  >
+  <ListPets
+    v-if="petList.length"
+    :listPets="petList"
+    :categoryPet="categoryPet"
+  />
   <button
     class="btn load-more"
     @click="loadMore"
@@ -22,6 +21,7 @@
 <script>
 import axios from "axios";
 import Loading from "../components/utilities/Loading.vue";
+import ListPets from "../components/utilities/ListPets.vue";
 
 export default {
   data() {
@@ -32,16 +32,15 @@ export default {
       offset: 0,
     };
   },
-  components: { Loading },
+  components: { Loading, ListPets },
   computed: {
-    pets() {
+    categoryPet() {
       return this.$route.path.slice(1);
     },
     pet() {
-      return (this.pets.charAt(0).toUpperCase() + this.pets.slice(1)).slice(
-        0,
-        -1
-      );
+      return (
+        this.categoryPet.charAt(0).toUpperCase() + this.categoryPet.slice(1)
+      ).slice(0, -1);
     },
   },
   methods: {
@@ -49,7 +48,7 @@ export default {
       this.loadingList = true;
       await axios
         .get(
-          `https://api.api-ninjas.com/v1/${this.pets}?max_weight=9999&offset=${this.offset}`,
+          `https://api.api-ninjas.com/v1/${this.categoryPet}?max_weight=9999&offset=${this.offset}`,
           {
             headers: {
               "X-Api-Key": "e4cVT8BzEFD562z74IXKZg==qttxkrNa0ZYegkU8",
@@ -82,51 +81,10 @@ export default {
 
 <style scoped>
 h1 {
-  font-size: 2.4rem;
+  font-size: 2.2rem;
 }
 h1 span {
   color: var(--cor-1);
-}
-.list {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-auto-rows: 220px;
-  grid-gap: 0.7rem;
-  margin-top: 3rem;
-}
-
-.pet-item {
-  border-radius: 0.2rem;
-  position: relative;
-  overflow: hidden;
-}
-
-.pet-item img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.pet-item a {
-  width: 100%;
-  height: 100%;
-  background: var(--cor-3);
-}
-
-.pet-item p {
-  position: absolute;
-  transform: translateY(0);
-  width: 100%;
-  height: 3rem;
-  line-height: 3rem;
-  text-align: center;
-  color: var(--cor-2);
-  transition: 0.2s;
-  background: #2e2d60;
-}
-
-.pet-item:hover p {
-  transform: translateY(-3rem);
 }
 
 .load-more {
@@ -139,12 +97,6 @@ h1 span {
   cursor: progress;
 }
 
-.load-spinner {
-  height: calc(100vh - 12rem);
-  display: grid;
-  place-items: center;
-}
-
 .scroll-btn {
   position: fixed;
   bottom: 5%;
@@ -154,5 +106,11 @@ h1 span {
   width: 3rem;
   height: 3rem;
   border-radius: 50%;
+}
+
+.load-spinner {
+  min-height: calc(100vh - 12rem);
+  display: grid;
+  place-items: center;
 }
 </style>

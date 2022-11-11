@@ -1,27 +1,31 @@
 <template>
   <main class="container main padding">
     <h1>
-      Results for <span>"{{ searchValue }}"</span> in
+      Main results for <span>"{{ searchValue }}"</span> in
       <span>{{ selectedPet }}</span>
     </h1>
-    <ul v-if="listBreeds.length">
-      <li v-for="breed in listBreeds" :key="breed.name">
-        <router-link to="/">
-          <img :src="breed.image_link" :alt="breed.name" />
-          <p>{{ breed.name }}</p>
-        </router-link>
-      </li>
-    </ul>
+    <Loading v-if="loadingList && !listPets.length" class="load-spinner"
+      >Loading</Loading
+    >
+    <ListPets
+      v-if="!loadingList && listPets.length"
+      :listPets="listPets"
+      :categoryPet="selectedPet"
+    />
+    <p v-if="!loadingList && !listPets.length" class="error">No data found.</p>
   </main>
 </template>
 
 <script>
 import axios from "axios";
+import ListPets from "../components/utilities/ListPets.vue";
+import Loading from "../components/utilities/Loading.vue";
+
 export default {
   data() {
     return {
-      listBreeds: [],
-      loadingPets: false,
+      loadingList: false,
+      listPets: [],
     };
   },
   computed: {
@@ -34,8 +38,8 @@ export default {
   },
   methods: {
     async fetchPetsBreeds() {
-      this.loadingPets = true;
-      this.listBreeds = [];
+      this.loadingList = true;
+      this.listPets = [];
       await axios
         .get(
           `https://api.api-ninjas.com/v1/${this.selectedPet}?max_height=9999&name=${this.searchValue}`,
@@ -46,14 +50,18 @@ export default {
           }
         )
         .then((d) => {
-          this.listBreeds = d.data.slice(0, 19);
+          this.listPets = d.data.slice(0, 19);
         });
 
-      this.loadingPets = false;
+      this.loadingList = false;
     },
   },
   created() {
     this.fetchPetsBreeds();
+  },
+  components: {
+    ListPets,
+    Loading,
   },
 };
 </script>
@@ -62,5 +70,14 @@ export default {
 <style scoped>
 h1 span {
   color: var(--cor-1);
+}
+h1 {
+  font-size: 2.2rem;
+}
+
+.load-spinner {
+  min-height: calc(100vh - 12rem);
+  display: grid;
+  place-items: center;
 }
 </style>
