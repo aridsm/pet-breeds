@@ -37,7 +37,6 @@ export default {
   },
   computed: {
     pet() {
-      console.log(this.$route);
       return this.$route.name;
     },
     breedDetailsList() {
@@ -79,6 +78,7 @@ export default {
   },
   created() {
     document.title = this.breed;
+    console.log(this.$route);
   },
 };
 </script>

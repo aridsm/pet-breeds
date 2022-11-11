@@ -3,10 +3,10 @@
     <h1>{{ pet }} <span>breeds</span></h1>
     <Loading v-if="loadingList" class="load-spinner">Loading</Loading>
     <ul v-if="petList.length" class="list">
-      <li v-for="dog in petList" :key="dog.name" class="pet-item">
-        <router-link :to="`/dogs/${dog.name}`" target="_blank">
-          <img :src="dog.image_link" :alt="dog.name" />
-          <p>{{ dog.name }}</p>
+      <li v-for="pet in petList" :key="pet.name" class="pet-item">
+        <router-link :to="`/${pets}/${pet.name}`" target="_blank">
+          <img :src="pet.image_link" :alt="pet.name" />
+          <p>{{ pet.name }}</p>
         </router-link>
       </li>
     </ul>
@@ -37,7 +37,8 @@ export default {
   components: { Loading },
   computed: {
     pets() {
-      return this.$route.name;
+      console.log(this.$route.path.slice(1));
+      return this.$route.path.slice(1);
     },
     pet() {
       return (this.pets.charAt(0).toUpperCase() + this.pets.slice(1)).slice(
@@ -82,7 +83,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 h1 {
   font-size: 2.4rem;
 }

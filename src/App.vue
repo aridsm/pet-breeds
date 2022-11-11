@@ -54,13 +54,13 @@ export default {
 }
 
 #triangle-1 {
-  top: 20%;
+  top: 25vh;
   left: 9%;
   transform: rotate(45deg);
 }
 
 #triangle-2 {
-  bottom: 15%;
+  bottom: 18vh;
   right: 11%;
   transform: rotate(-20deg);
 }

@@ -6,14 +6,41 @@ function lazyLoad(view) {
 
 const routes = [
   { path: "/", name: "home", component: lazyLoad("Home") },
-  { path: "/cats", name: "cats", component: lazyLoad("PetsList") },
-  { path: "/dogs", name: "dogs", component: lazyLoad("PetsList") },
   {
-    path: "/dogs/:breed",
-    name: "breed",
-    component: lazyLoad("BreedDetails"),
-    props: true,
+    path: "/:pet(dogs|cats)",
+    component: lazyLoad("Pets"),
+    children: [
+      {
+        path: "",
+        component: lazyLoad("PetsList"),
+      },
+      {
+        path: ":breed",
+        name: "breed",
+        component: lazyLoad("BreedDetails"),
+        props: true,
+      },
+    ],
   },
+  /*{
+    path: "/cats",
+    name: "cats",
+    component: lazyLoad("Pets"),
+    children: [
+      {
+        path: "",
+        name: "cats",
+        component: lazyLoad("PetsList"),
+      },
+      {
+        path: ":breed",
+        name: "breed",
+        component: lazyLoad("BreedDetails"),
+        props: true,
+      },
+    ],
+  },*/
+  { path: "/results", name: "results", component: lazyLoad("Results") },
 ];
 
 export default createRouter({
