@@ -20,24 +20,6 @@ const routes = [
       },
     ],
   },
-  /*{
-    path: "/cats",
-    name: "cats",
-    component: lazyLoad("Pets"),
-    children: [
-      {
-        path: "",
-        name: "cats",
-        component: lazyLoad("PetsList"),
-      },
-      {
-        path: ":breed",
-        name: "breed",
-        component: lazyLoad("BreedDetails"),
-        props: true,
-      },
-    ],
-  },*/
   { path: "/results", name: "results", component: lazyLoad("Results") },
 ];
 

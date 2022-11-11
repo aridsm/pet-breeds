@@ -40,7 +40,7 @@ export default {
   margin-top: -2rem;
 }
 .flex-2 img {
-  width: 14rem;
+  width: 14.5rem;
 }
 
 .img,
@@ -65,7 +65,7 @@ h1 {
 }
 
 h1 {
-  font-size: 3.6rem;
+  font-size: 3.7rem;
   font-weight: 800;
 }
 

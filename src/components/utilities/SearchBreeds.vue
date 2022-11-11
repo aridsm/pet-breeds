@@ -1,6 +1,6 @@
 <template>
   <div class="search-container">
-    <form :id="formId">
+    <form :id="formId" @submit.prevent="searchBreeds">
       <div class="input-container">
         <label :for="inputId">Search for a breed</label>
         <input
@@ -112,6 +112,12 @@ export default {
       if (e.target !== form && !form.contains(e.target)) {
         this.inputValue = "";
       }
+    },
+    searchBreeds() {
+      this.$router.push({
+        path: "results",
+        query: { breed: this.inputValue, pet: this.selectedPet },
+      });
     },
   },
   watch: {

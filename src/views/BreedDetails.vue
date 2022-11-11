@@ -62,9 +62,14 @@ export default {
     },
     fixKeyName(name) {
       let newName = name;
-
+      console.log(newName);
       function valueIsARange(val) {
-        return !(val.startsWith("max") || val.startsWith("min"));
+        return !(
+          val.startsWith("max") ||
+          val.startsWith("min") ||
+          val === "origin" ||
+          val === "length"
+        );
       }
 
       if (valueIsARange(newName)) {
