@@ -1,25 +1,23 @@
 <template>
-  <main class="container main padding">
-    <Loading v-if="loadingDetails">Loading</Loading>
-    <div v-if="breedDetails" class="container-breed">
-      <div class="flex-1">
-        <h1>{{ breedDetails.name }}</h1>
-        <ul>
-          <li
-            v-for="(value, propName) in breedDetailsList"
-            :key="propName"
-            class="item"
-          >
-            <p>{{ fixKeyName(propName) }}:</p>
-            <span>{{ value }}</span>
-          </li>
-        </ul>
-      </div>
-      <div class="flex-2">
-        <img :src="breedDetails.image_link" :alt="breedDetails.name" />
-      </div>
+  <Loading v-if="loadingDetails"></Loading>
+  <div v-if="breedDetails" class="container-breed">
+    <div class="flex-1">
+      <h1>{{ breedDetails.name }}</h1>
+      <ul>
+        <li
+          v-for="(value, propName) in breedDetailsList"
+          :key="propName"
+          class="item"
+        >
+          <p>{{ fixKeyName(propName) }}:</p>
+          <span>{{ fixValue(value, propName) }}</span>
+        </li>
+      </ul>
     </div>
-  </main>
+    <div class="flex-2">
+      <img :src="breedDetails.image_link" :alt="breedDetails.name" />
+    </div>
+  </div>
 </template>
 
 <script>
@@ -27,7 +25,6 @@ import axios from "axios";
 import Loading from "../components/utilities/Loading.vue";
 
 export default {
-  props: ["breed"],
   components: { Loading },
   data() {
     return {
@@ -37,7 +34,10 @@ export default {
   },
   computed: {
     pet() {
-      return this.$route.name;
+      return this.$route.params.pet;
+    },
+    breed() {
+      return this.$route.params.breed;
     },
     breedDetailsList() {
       const newBreedDetails = { ...this.breedDetails };
@@ -50,7 +50,7 @@ export default {
     async fetchBreedDetails() {
       this.loadingDetails = true;
       await axios
-        .get(`https://api.api-ninjas.com/v1/dogs?name=${this.breed}`, {
+        .get(`https://api.api-ninjas.com/v1/${this.pet}?name=${this.breed}`, {
           headers: {
             "X-Api-Key": "e4cVT8BzEFD562z74IXKZg==qttxkrNa0ZYegkU8",
           },
@@ -72,13 +72,24 @@ export default {
       }
       return newName.replaceAll("_", " ");
     },
+    fixValue(val, name) {
+      if (name.includes("height")) {
+        return val + " inches";
+      }
+      if (name.includes("weight")) {
+        return val + " pounds";
+      }
+      if (name.includes("life")) {
+        return val + " years";
+      }
+      return val;
+    },
   },
   mounted() {
     this.fetchBreedDetails();
   },
   created() {
-    document.title = this.breed;
-    console.log(this.$route);
+    document.title = `${this.breed} - ${this.pet} | Pet breeds`;
   },
 };
 </script>

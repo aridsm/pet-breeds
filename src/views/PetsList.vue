@@ -1,24 +1,22 @@
 <template>
-  <main class="container padding">
-    <h1>{{ pet }} <span>breeds</span></h1>
-    <Loading v-if="loadingList" class="load-spinner">Loading</Loading>
-    <ul v-if="petList.length" class="list">
-      <li v-for="pet in petList" :key="pet.name" class="pet-item">
-        <router-link :to="`/${pets}/${pet.name}`" target="_blank">
-          <img :src="pet.image_link" :alt="pet.name" />
-          <p>{{ pet.name }}</p>
-        </router-link>
-      </li>
-    </ul>
-    <button
-      class="btn load-more"
-      @click="loadMore"
-      :disabled="loadingButton || loadingList"
-    >
-      {{ loadingButton ? "Loading more..." : "Load more" }}
-    </button>
-    <button @click="scrollToTop" class="scroll-btn">Top</button>
-  </main>
+  <h1>{{ pet }} <span>breeds</span></h1>
+  <Loading v-if="loadingList" class="load-spinner">Loading</Loading>
+  <ul v-if="petList.length" class="list">
+    <li v-for="pet in petList" :key="pet.name" class="pet-item">
+      <router-link :to="`/${pets}/${pet.name}`" target="_blank">
+        <img :src="pet.image_link" :alt="pet.name" />
+        <p>{{ pet.name }}</p>
+      </router-link>
+    </li>
+  </ul>
+  <button
+    class="btn load-more"
+    @click="loadMore"
+    :disabled="loadingButton || loadingList"
+  >
+    {{ loadingButton ? "Loading more..." : "Load more" }}
+  </button>
+  <button @click="scrollToTop" class="scroll-btn">Top</button>
 </template>
 
 <script>
@@ -37,7 +35,6 @@ export default {
   components: { Loading },
   computed: {
     pets() {
-      console.log(this.$route.path.slice(1));
       return this.$route.path.slice(1);
     },
     pet() {
@@ -78,7 +75,7 @@ export default {
     this.fetchPets();
   },
   created() {
-    document.title = `${this.pet} breeds`;
+    document.title = `${this.pet}s list | Pet breeds`;
   },
 };
 </script>

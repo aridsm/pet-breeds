@@ -16,9 +16,7 @@ const routes = [
       },
       {
         path: ":breed",
-        name: "breed",
         component: lazyLoad("BreedDetails"),
-        props: true,
       },
     ],
   },
