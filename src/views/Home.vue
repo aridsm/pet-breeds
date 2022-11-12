@@ -128,7 +128,10 @@ h1 span {
 }
 @media (max-width: 490px) {
   h1 {
-    font-size: 2.6rem;
+    font-size: 2.4rem;
+  }
+  .form {
+    width: 100%;
   }
 }
 </style>

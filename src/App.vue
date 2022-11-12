@@ -83,5 +83,13 @@ export default {
     height: 12rem;
     width: 12rem;
   }
+  .triangle {
+    background-size: 1.2rem;
+    height: 1.2rem;
+    width: 1.2rem;
+  }
+  #triangle-1 {
+    top: 40vh;
+  }
 }
 </style>

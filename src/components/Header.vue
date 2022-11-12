@@ -5,7 +5,17 @@
         <span id="logo"></span>
         <span>Pets breeds</span>
       </router-link>
-      <nav class="nav" v-show="!searchFieldShown">
+      <button
+        @click="toggleMenu"
+        class="btn-menu"
+        :class="{ active: showMenu }"
+        :title="showMenu ? 'Close menu' : 'Open menu'"
+      ></button>
+      <nav
+        v-show="!searchFieldShown && showMenu"
+        class="nav"
+        :class="{ ['bg-style']: isMobile }"
+      >
         <ul>
           <li><router-link to="/">Home</router-link></li>
           <li><router-link to="/dogs">Dogs</router-link></li>
@@ -37,7 +47,14 @@ export default {
     return {
       didPageScroll: false,
       searchFieldShown: false,
+      isMenuShown: false,
+      isMobile: null,
     };
+  },
+  computed: {
+    showMenu() {
+      return (this.isMobile && this.isMenuShown) || !this.isMobile;
+    },
   },
   components: { SearchBreeds },
   methods: {
@@ -63,14 +80,27 @@ export default {
         this.searchFieldShown = false;
       }
     },
+    toggleMenu() {
+      this.isMenuShown = !this.isMenuShown;
+    },
+    checkWindowWidth() {
+      if (window.innerWidth < 500) {
+        this.isMobile = true;
+      } else {
+        this.isMobile = false;
+      }
+    },
   },
   mounted() {
     window.addEventListener("scroll", this.checkPageScroll);
     window.addEventListener("click", this.checkOutsideClick);
+    window.addEventListener("resize", this.checkWindowWidth);
+    this.checkWindowWidth();
   },
   unmounted() {
     window.removeEventListener("scroll", this.checkPageScroll);
     window.removeEventListener("click", this.checkOutsideClick);
+    window.removeEventListener("resize", this.checkWindowWidth);
   },
 };
 </script>
@@ -154,5 +184,52 @@ header.scrolled {
   position: absolute;
   right: 1.2rem;
   max-height: 2.6rem;
+}
+.btn-menu {
+  display: none;
+}
+@media (max-width: 500px) {
+  .btn-menu {
+    display: block;
+    margin-left: auto;
+    background-image: url("../assets/menu.svg");
+    background-size: 1rem;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 1.4rem;
+    width: 1.4rem;
+    border-radius: 0.2rem;
+  }
+
+  .btn-menu.active {
+    box-shadow: 0 0 0 2px var(--cor-1);
+  }
+
+  .nav {
+    position: absolute;
+    right: 1.2rem;
+    top: 4.5rem;
+    border-radius: 0.2rem;
+  }
+
+  .nav li {
+    display: block;
+    padding: 0.7rem 1.4rem;
+  }
+
+  .nav li + li {
+    margin-left: 0;
+  }
+  .nav .router-link-active::after {
+    display: none;
+  }
+
+  .nav .router-link-active {
+    color: var(--cor-1);
+  }
+
+  #search {
+    margin-left: 1.5rem;
+  }
 }
 </style>

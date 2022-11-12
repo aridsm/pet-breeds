@@ -39,7 +39,12 @@
           </div>
         </div>
       </div>
-      <button class="btn" :class="{ btnHeader: classBtn }" type="submit">
+      <button
+        class="btn"
+        id="search-btn"
+        :class="{ btnHeader: classBtn }"
+        type="submit"
+      >
         Search
       </button>
     </form>
@@ -117,11 +122,12 @@ export default {
       }
     },
     searchBreeds() {
-      console.log(this.$route);
-      this.$router.push({
-        path: "/results",
-        query: { breed: this.inputValue, pet: this.selectedPet },
-      });
+      if (this.inputValue) {
+        this.$router.push({
+          path: "/results",
+          query: { breed: this.inputValue, pet: this.selectedPet },
+        });
+      }
     },
   },
   watch: {
@@ -129,7 +135,9 @@ export default {
       this.fetchPetsBreeds();
     },
     selectedPet() {
-      this.fetchPetsBreeds();
+      if (this.inputValue) {
+        this.fetchPetsBreeds();
+      }
     },
   },
   mounted() {
@@ -158,12 +166,16 @@ form {
 .input-container input {
   width: 100%;
   height: 100%;
+  padding-right: 3rem;
 }
 
 form input:focus {
   box-shadow: 0 0 0 1px var(--cor-3);
 }
-
+#search-btn {
+  position: relative;
+  z-index: 2;
+}
 .input-container > label,
 .options input {
   visibility: hidden;

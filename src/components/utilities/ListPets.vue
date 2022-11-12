@@ -25,8 +25,8 @@ export default {
 <style scoped>
 .list {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-auto-rows: 250px;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  grid-auto-rows: 270px;
   grid-gap: 0.7rem;
   margin-top: 2rem;
 }
@@ -52,7 +52,7 @@ export default {
 }
 .img-div {
   width: 100%;
-  height: 200px;
+  height: 220px;
 }
 
 .img-div img {
@@ -64,5 +64,8 @@ export default {
 
 .breed-name {
   margin: 0.7rem auto auto auto;
+}
+
+@media (max-width: 520px) {
 }
 </style>

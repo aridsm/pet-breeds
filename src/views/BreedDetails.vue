@@ -1,5 +1,5 @@
 <template>
-  <Loading v-if="loadingDetails"></Loading>
+  <Loading v-if="loadingDetails" class="load-spinner"></Loading>
   <div v-if="breedDetails" class="container-breed">
     <div class="flex-1">
       <h1>{{ breedDetails.name }}</h1>
@@ -62,7 +62,6 @@ export default {
     },
     fixKeyName(name) {
       let newName = name;
-      console.log(newName);
       function valueIsARange(val) {
         return !(
           val.startsWith("max") ||
@@ -105,12 +104,6 @@ export default {
 }
 
 .flex-2 {
-  max-width: 25rem;
-  width: 100%;
-  height: 15rem;
-  border-radius: 0.2rem;
-  overflow: hidden;
-  background: var(--cor-3);
   position: relative;
 }
 
@@ -129,14 +122,15 @@ export default {
 }
 
 .flex-2 img {
+  max-width: 25rem;
   width: 100%;
-  height: 100%;
   object-fit: cover;
+  border-radius: 0.2rem;
 }
 
 .flex-1 {
   flex: 1;
-  margin-right: 4rem;
+  margin-right: 2rem;
 }
 
 .item {
@@ -158,5 +152,26 @@ ul {
 }
 .item span {
   color: var(--cor-3);
+}
+.load-spinner {
+  min-height: calc(100vh - 12rem);
+  display: grid;
+  place-items: center;
+}
+@media (max-width: 850px) {
+  .container-breed {
+    flex-direction: column;
+  }
+  .flex-1 {
+    margin-right: 0;
+  }
+  .flex-2 {
+    order: -1;
+    margin: 0 auto 3rem auto;
+  }
+
+  h1 {
+    text-align: center;
+  }
 }
 </style>
