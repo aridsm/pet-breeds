@@ -82,4 +82,53 @@ h1 span {
   margin-top: 3rem;
   width: 90%;
 }
+@media (max-width: 1000px) {
+  .main {
+    justify-content: center;
+  }
+
+  .flex-1 {
+    margin-right: 4rem;
+  }
+}
+@media (max-width: 860px) {
+  h1 {
+    font-size: 3.2rem;
+    text-align: center;
+  }
+
+  .description {
+    text-align: center;
+  }
+  .main {
+    flex-direction: column;
+    align-items: center;
+  }
+  .flex-1,
+  .flex-2 {
+    margin-top: 0;
+  }
+
+  .flex-2 {
+    margin-top: 4rem;
+  }
+  .flex-1 {
+    margin-right: 0;
+  }
+  .form {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .img::after {
+    right: -5rem;
+    height: 22rem;
+    width: 22rem;
+    background-size: 17rem;
+  }
+}
+@media (max-width: 490px) {
+  h1 {
+    font-size: 2.6rem;
+  }
+}
 </style>

@@ -27,9 +27,7 @@ main {
 
 button,
 a,
-input,
-select,
-option {
+input {
   font-weight: inherit;
   font-size: inherit;
   font-family: inherit;
@@ -37,12 +35,9 @@ option {
   color: inherit;
 }
 
-input,
-select {
+input {
   border: none;
   outline: none;
-  background: var(--cor-4);
-  box-shadow: 0px 0px 50px rgba(203, 215, 189, 0.6);
   padding: 1rem;
   border-radius: 0.3rem;
 }
@@ -72,6 +67,13 @@ li {
   padding: 1.2rem;
   width: 100%;
 }
+
+.bg-style {
+  background: var(--cor-2);
+  box-shadow: 0px 0px 50px rgba(203, 215, 189, 0.6);
+  border: 1px solid rgba(203, 215, 189, 0.6);
+}
+
 .padding {
   padding-bottom: 5rem;
   margin-top: 7rem;

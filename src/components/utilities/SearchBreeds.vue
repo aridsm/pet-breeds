@@ -10,10 +10,11 @@
           "
           :id="inputId"
           v-model="inputValue"
+          class="bg-style"
         />
         <div class="select-option">
           <button type="button">{{ selectedPet }}</button>
-          <div class="options">
+          <div class="options bg-style">
             <label :for="dogInputId" :class="{ active: selectedPet === 'dogs' }"
               >Dogs</label
             >
@@ -47,7 +48,9 @@
         <Loading v-if="loadingPets" class="load-spinner" />
         <ul v-if="petsList.length">
           <li v-for="pet in petsList" :key="pet.name">
-            <router-link to="/"> {{ pet.name }} </router-link>
+            <router-link :to="`/${selectedPet}/${pet.name}`">
+              {{ pet.name }}
+            </router-link>
           </li>
         </ul>
         <p v-if="!loadingPets && !petsList.length">No data found</p>
@@ -114,8 +117,9 @@ export default {
       }
     },
     searchBreeds() {
+      console.log(this.$route);
       this.$router.push({
-        path: "results",
+        path: "/results",
         query: { breed: this.inputValue, pet: this.selectedPet },
       });
     },
@@ -187,8 +191,6 @@ form input:focus {
 .options {
   position: absolute;
   top: 100%;
-  background: var(--cor-4);
-  box-shadow: 0px 0px 50px rgba(203, 215, 189, 0.6);
   border-radius: 0.3rem;
   visibility: hidden;
   opacity: 0;

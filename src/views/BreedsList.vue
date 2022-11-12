@@ -15,7 +15,11 @@
   >
     {{ loadingButton ? "Loading more..." : "Load more" }}
   </button>
-  <button @click="scrollToTop" class="scroll-btn">Top</button>
+  <button
+    @click="scrollToTop"
+    class="scroll-btn bg-style"
+    title="Scroll to top"
+  ></button>
 </template>
 
 <script>
@@ -101,8 +105,10 @@ h1 span {
   position: fixed;
   bottom: 5%;
   right: 5%;
-  background: var(--cor-4);
-  box-shadow: 0px 0px 40px rgba(203, 215, 189, 1);
+  background-image: url("../assets/arrow.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 0.7rem;
   width: 3rem;
   height: 3rem;
   border-radius: 50%;

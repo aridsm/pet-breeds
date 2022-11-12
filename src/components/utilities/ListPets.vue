@@ -1,7 +1,7 @@
 <template>
   <ul class="list">
     <li v-for="breed in listPets" :key="breed.name">
-      <router-link :to="`/${categoryPet}/${breed.name}`" class="link">
+      <router-link :to="`/${categoryPet}/${breed.name}`" class="link bg-style">
         <div class="img-div">
           <img :src="breed.image_link" :alt="breed.name" />
         </div>
@@ -39,11 +39,8 @@ export default {
 }
 
 .link {
-  background: var(--cor-2);
   padding: 0.5rem;
   border-radius: 0.2rem;
-  border: 1px solid rgba(203, 215, 189, 0.6);
-  box-shadow: 0px 0px 30px rgba(203, 215, 189, 0.6);
   display: flex;
   flex-direction: column;
   transition: 0.2s;

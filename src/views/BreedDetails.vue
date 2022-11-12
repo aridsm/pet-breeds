@@ -7,7 +7,7 @@
         <li
           v-for="(value, propName) in breedDetailsList"
           :key="propName"
-          class="item"
+          class="item bg-style"
         >
           <p>{{ fixKeyName(propName) }}:</p>
           <span>{{ fixValue(value, propName) }}</span>
@@ -105,9 +105,12 @@ export default {
 }
 
 .flex-2 {
-  width: 28rem;
+  max-width: 25rem;
+  width: 100%;
   height: 15rem;
-  padding-left: 4rem;
+  border-radius: 0.2rem;
+  overflow: hidden;
+  background: var(--cor-3);
   position: relative;
 }
 
@@ -129,19 +132,17 @@ export default {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: 0.2rem;
 }
 
 .flex-1 {
   flex: 1;
+  margin-right: 4rem;
 }
 
 .item {
   display: flex;
-  background: var(--cor-4);
   border-radius: 0.2rem;
   padding: 1rem;
-  box-shadow: 0px 0px 50px rgba(203, 215, 189, 0.2);
 }
 ul {
   margin-top: 3rem;

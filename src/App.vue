@@ -26,6 +26,7 @@ export default {
 .hexagon {
   background: url("./assets/hexagon.svg") no-repeat center;
   position: absolute;
+  z-index: -1;
 }
 
 #hexagon-1 {
@@ -51,6 +52,7 @@ export default {
   background-size: 1.6rem;
   height: 1.6rem;
   width: 1.6rem;
+  z-index: -1;
 }
 
 #triangle-1 {
@@ -73,5 +75,13 @@ export default {
 .v-enter-active,
 .v-leave-active {
   transition: 0.2s;
+}
+
+@media (max-width: 600px) {
+  #hexagon-1 {
+    background-size: 10rem;
+    height: 12rem;
+    width: 12rem;
+  }
 }
 </style>

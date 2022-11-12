@@ -16,6 +16,7 @@
         id="search"
         v-show="!searchFieldShown"
         @click="showSearchField"
+        title="Open search field"
       ></button>
       <transition>
         <SearchBreeds
@@ -94,7 +95,7 @@ header {
 header.scrolled {
   height: 4rem;
   background: var(--cor-2);
-  border-bottom: 1px solid rgb(193, 204, 210);
+  border-bottom: 1px solid rgba(203, 215, 189, 0.6);
 }
 
 .nav {
@@ -151,7 +152,7 @@ header.scrolled {
 
 .form {
   position: absolute;
-  right: 0;
+  right: 1.2rem;
   max-height: 2.6rem;
 }
 </style>
