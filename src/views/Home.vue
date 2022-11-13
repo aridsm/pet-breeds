@@ -83,6 +83,7 @@ h1 {
 .form {
   margin-top: 3rem;
   width: 90%;
+  z-index: 2;
 }
 @media (max-width: 1000px) {
   .main {
@@ -134,6 +135,17 @@ h1 {
   }
   .form {
     width: 100%;
+  }
+  .flex-2 img {
+    width: 12rem;
+  }
+
+  .img::after {
+    right: -3rem;
+    height: 14rem;
+    width: 14rem;
+    background-size: 12rem;
+    top: 6rem;
   }
 }
 </style>
