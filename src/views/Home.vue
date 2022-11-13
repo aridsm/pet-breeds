@@ -12,19 +12,24 @@
       <SearchBreeds class="form" el="home" />
     </div>
     <div class="flex-2 img">
-      <img src="../assets/dog.svg" />
+      <img src="../assets/dog.svg" alt="cachorro" />
     </div>
   </main>
 </template>
 
 <script>
 import SearchBreeds from "../components/utilities/SearchBreeds.vue";
+import useHead from "../composables/useHead";
 
 export default {
-  created() {
-    document.title = "Home | Pet breeds";
+  setup() {
+    const { changeHeaderData } = useHead();
+    return { changeHeaderData };
   },
   components: { SearchBreeds },
+  mounted() {
+    this.changeHeaderData("Home", "Search for pet breeds!");
+  },
 };
 </script>
 
@@ -41,6 +46,7 @@ export default {
 }
 .flex-2 img {
   width: 14.5rem;
+  height: auto;
 }
 
 .img,

@@ -20,6 +20,7 @@
 import axios from "axios";
 import ListPets from "../components/utilities/ListPets.vue";
 import Loading from "../components/utilities/Loading.vue";
+import useHead from "../composables/useHead";
 
 export default {
   data() {
@@ -27,6 +28,10 @@ export default {
       loadingList: false,
       listPets: [],
     };
+  },
+  setup() {
+    const { changeHeaderData } = useHead();
+    return { changeHeaderData };
   },
   computed: {
     searchValue() {
@@ -58,6 +63,10 @@ export default {
   },
   created() {
     this.fetchPetsBreeds();
+    this.changeHeaderData(
+      `Results for "${this.searchValue}"`,
+      `Main results for "${this.searchValue}" in "${this.selectedPet}"`
+    );
   },
   components: {
     ListPets,
@@ -70,9 +79,6 @@ export default {
 <style scoped>
 h1 span {
   color: var(--cor-1);
-}
-h1 {
-  font-size: 2.2rem;
 }
 
 .load-spinner {

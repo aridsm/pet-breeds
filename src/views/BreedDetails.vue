@@ -23,6 +23,7 @@
 <script>
 import axios from "axios";
 import Loading from "../components/utilities/Loading.vue";
+import useHead from "../composables/useHead";
 
 export default {
   components: { Loading },
@@ -31,6 +32,10 @@ export default {
       breedDetails: [],
       loadingDetails: false,
     };
+  },
+  setup() {
+    const { changeHeaderData } = useHead();
+    return { changeHeaderData };
   },
   computed: {
     pet() {
@@ -91,9 +96,10 @@ export default {
   },
   mounted() {
     this.fetchBreedDetails();
-  },
-  created() {
-    document.title = `${this.breed} - ${this.pet} | Pet breeds`;
+    this.changeHeaderData(
+      `${this.breed} - ${this.pet}`,
+      `${this.breed} details`
+    );
   },
 };
 </script>

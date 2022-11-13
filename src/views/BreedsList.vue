@@ -26,6 +26,7 @@
 import axios from "axios";
 import Loading from "../components/utilities/Loading.vue";
 import ListPets from "../components/utilities/ListPets.vue";
+import useHead from "../composables/useHead";
 
 export default {
   data() {
@@ -35,6 +36,10 @@ export default {
       loadingButton: false,
       offset: 0,
     };
+  },
+  setup() {
+    const { changeHeaderData } = useHead();
+    return { changeHeaderData };
   },
   components: { Loading, ListPets },
   computed: {
@@ -76,17 +81,12 @@ export default {
   },
   mounted() {
     this.fetchPets();
-  },
-  created() {
-    document.title = `${this.pet}s list | Pet breeds`;
+    this.changeHeaderData(`${this.pet} List`, `List for ${this.pet} breeds`);
   },
 };
 </script>
 
 <style scoped>
-h1 {
-  font-size: 2.2rem;
-}
 h1 span {
   color: var(--cor-1);
 }
