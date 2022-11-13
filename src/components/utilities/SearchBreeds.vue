@@ -11,6 +11,7 @@
           :id="inputId"
           v-model="inputValue"
           class="bg-style"
+          @input="(e) => (inputValue = e.target.value)"
         />
         <div class="select-option">
           <button type="button">{{ selectedPet }}</button>

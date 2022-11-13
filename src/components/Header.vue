@@ -231,5 +231,9 @@ header.scrolled {
   #search {
     margin-left: 1.5rem;
   }
+
+  .form {
+    left: 1.2rem;
+  }
 }
 </style>

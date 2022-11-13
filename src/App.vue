@@ -84,12 +84,12 @@ export default {
     width: 12rem;
   }
   .triangle {
-    background-size: 1.2rem;
-    height: 1.2rem;
-    width: 1.2rem;
+    background-size: 1rem;
+    height: 1rem;
+    width: 1rem;
   }
   #triangle-1 {
-    top: 40vh;
+    top: 18rem;
   }
 }
 </style>
