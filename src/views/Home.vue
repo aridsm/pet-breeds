@@ -75,10 +75,6 @@ h1 {
   font-weight: 800;
 }
 
-h1 span {
-  color: var(--cor-1);
-}
-
 .description {
   color: var(--cor-3);
   margin-top: 1rem;

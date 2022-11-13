@@ -1,6 +1,6 @@
 <template>
   <Loading v-if="loadingDetails" class="load-spinner"></Loading>
-  <div v-if="breedDetails" class="container-breed">
+  <div v-if="breedDetails && !loadingDetails" class="container-breed">
     <div class="flex-1">
       <h1>{{ breedDetails.name }}</h1>
       <ul>
@@ -17,6 +17,15 @@
     <div class="flex-2">
       <img :src="breedDetails.image_link" :alt="breedDetails.name" />
     </div>
+  </div>
+  <div v-if="!breedDetails && !loadingDetails">
+    <h1>
+      Not data found for <span>"{{ breed }}"</span> in <span>"{{ pet }}"</span>
+    </h1>
+    <p class="error-message">
+      Make sure you entered the correct name, or try to search in another
+      category.
+    </p>
   </div>
 </template>
 
@@ -164,6 +173,10 @@ ul {
   display: grid;
   place-items: center;
 }
+
+.error-message {
+  margin-top: 2rem;
+}
 @media (max-width: 850px) {
   .container-breed {
     flex-direction: column;
@@ -176,7 +189,7 @@ ul {
     margin: 0 auto 3rem auto;
   }
 
-  h1 {
+  .container-breed h1 {
     text-align: center;
   }
 }

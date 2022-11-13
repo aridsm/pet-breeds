@@ -77,10 +77,6 @@ export default {
 >
 
 <style scoped>
-h1 span {
-  color: var(--cor-1);
-}
-
 .load-spinner {
   min-height: calc(100vh - 12rem);
   display: grid;

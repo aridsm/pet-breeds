@@ -23,6 +23,9 @@ body {
 h1 {
   font-size: 2.2rem;
 }
+h1 span {
+  color: var(--cor-1);
+}
 main {
   min-height: calc(100vh - 7rem);
   position: relative;

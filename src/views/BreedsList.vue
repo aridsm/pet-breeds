@@ -87,10 +87,6 @@ export default {
 </script>
 
 <style scoped>
-h1 span {
-  color: var(--cor-1);
-}
-
 .load-more {
   margin: 3rem auto 0 auto;
   display: block;
