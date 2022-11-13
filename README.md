@@ -2,6 +2,8 @@
 
 Website para busca de dados de diversas raças de cães e gatos feito a partir da [API Ninjas](https://api-ninjas.com/api/dogs).
 
+![página inicial](https://github.com/aridsm/pet-breeds/blob/master/public/pet-breeds.png)
+
 ## Linguagens e ferramentas
 
 Feito com Vue js, Vue Router, além de JavaScript, HTML e CSS. Prototipagem feita com Figma.
