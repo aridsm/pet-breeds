@@ -6,7 +6,7 @@
         or dog <span>breed!</span>
       </h1>
       <p class="description">
-        Data for more than 400 cat and <br />
+        Data for more than 200 cat and <br />
         dog breeds
       </p>
       <SearchBreeds class="form" el="home" />

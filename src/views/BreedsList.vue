@@ -11,9 +11,15 @@
   <button
     class="btn load-more"
     @click="loadMore"
-    :disabled="loadingButton || loadingList"
+    :disabled="loadingButton || loadingList || breedsFinished"
   >
-    {{ loadingButton ? "Loading more..." : "Load more" }}
+    {{
+      loadingButton
+        ? "Loading more..."
+        : breedsFinished
+        ? "No more breeds"
+        : "Load more"
+    }}
   </button>
   <button
     @click="scrollToTop"
@@ -35,6 +41,7 @@ export default {
       loadingList: false,
       loadingButton: false,
       offset: 0,
+      breedsFinished: false,
     };
   },
   setup() {
@@ -65,8 +72,13 @@ export default {
           }
         )
         .then((list) => {
+          console.log(list.data);
           this.petList = this.petList.concat(list.data);
           this.loadingList = false;
+
+          if (!list.data.length) {
+            this.breedsFinished = true;
+          }
         });
     },
     async loadMore() {
