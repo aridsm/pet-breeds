@@ -86,4 +86,8 @@ h1 span {
   display: grid;
   place-items: center;
 }
+
+.error {
+  margin-top: 2rem;
+}
 </style>

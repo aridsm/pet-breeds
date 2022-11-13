@@ -21,6 +21,7 @@ const routes = [
     ],
   },
   { path: "/results", name: "results", component: lazyLoad("Results") },
+  { path: "/:notFound(.*)", redirect: "/" },
 ];
 
 export default createRouter({
