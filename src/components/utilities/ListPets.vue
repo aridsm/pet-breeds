@@ -25,7 +25,7 @@ export default {
 <style scoped>
 .list {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
   grid-auto-rows: 270px;
   grid-gap: 0.7rem;
   margin-top: 2rem;
@@ -46,7 +46,7 @@ export default {
   transition: 0.2s;
 }
 .link:hover {
-  box-shadow: 0px 0px 30px rgba(203, 215, 189, 0.8);
+  box-shadow: 0px 0px 30px rgba(203, 215, 189, 0.5);
   background: var(--cor-4);
   transform: translateY(-0.2rem);
 }
